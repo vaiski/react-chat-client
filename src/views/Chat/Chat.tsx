@@ -13,8 +13,6 @@ export const Chat: React.FC<ChatProps> = memo(({ userId, userName }) => {
   const [messageHistory, setMessageHistory] = useState<Array<any>>([]);
   const [othersTyping, setOthersTyping] = useState<boolean>(false);
 
-  const didUnmount = useRef(false);
-
   const ws = useRef<WebSocket>();
 
   const sendJsonMessage = (message: any) => {
@@ -61,12 +59,6 @@ export const Chat: React.FC<ChatProps> = memo(({ userId, userName }) => {
 
     return () => {
       socket.close();
-    };
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      didUnmount.current = true;
     };
   }, []);
 
